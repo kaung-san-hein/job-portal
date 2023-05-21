@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack'
 import flag from '../../assets/images/flag.png'
 import CustomTextField from './CustomTextField'
 
+// create HOC for phone
 const withPhoneNumberTextField = (Component) => {
     return (props) => {
         return (
@@ -35,4 +36,5 @@ const withPhoneNumberTextField = (Component) => {
     }
 }
 
+// use HOC with CustomTexField component
 export const PhoneNumberTextField = withPhoneNumberTextField(CustomTextField)

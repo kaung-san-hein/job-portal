@@ -5,6 +5,8 @@ import { jobLocations } from '../../mock/jobLocations';
 import { companies } from '../../mock/companies';
 import { jobs } from '../../mock/jobs';
 
+// can change api call code instead of mock data getting functions
+
 export const getJobTypes = createAsyncThunk('job/jobTypes', (_, thunkAPI) => {
     try {
         return jobTypes;

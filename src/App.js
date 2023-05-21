@@ -16,8 +16,10 @@ import { setCurrentUser } from "./store/reducers/auth";
 import { NotificationContainer } from "react-notifications";
 import PrivateRoute from "./routers/PrivateRoute";
 
+// get token from localstorage
 const token = getToken();
 
+// to check if token is valid whenever app start
 if (token) {
   store.dispatch(autoLogin());
   store.dispatch(setCurrentUser(JSON.parse(token)));
@@ -31,6 +33,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<JobListing />} />
+            
+            {/* protected register and login route */}
             <Route
               path="/register"
               element={

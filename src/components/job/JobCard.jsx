@@ -7,8 +7,16 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-const JobCard = ({ job }) => {
-    const { title, company, location, skills, type, description, createdAt } = job
+const JobCard = ({ job, onClick }) => {
+    const {
+        title,
+        company,
+        location,
+        skills,
+        type,
+        description,
+        createdAt
+    } = job;
 
     return (
         <Grid item xs={12} md={6}>
@@ -21,7 +29,14 @@ const JobCard = ({ job }) => {
                     <Typography variant="subtitle1" mb={1}>
                         {location.name}
                     </Typography>
-                    {skills.map((skill, index) => <Chip label={skill} key={index} variant="outlined" sx={{ mr: 1 }} />)}
+                    {skills.map((skill, index) => (
+                        <Chip
+                            label={skill}
+                            key={index}
+                            variant="outlined"
+                            sx={{ mr: 1, mb: 1 }}
+                        />
+                    ))}
                     <Typography variant="subtitle2" mt={1} sx={{ fontWeight: "bold" }}>
                         {type.name}
                     </Typography>
@@ -43,6 +58,7 @@ const JobCard = ({ job }) => {
                                 bgcolor: "var(--primary-color)",
                                 borderRadius: "8px",
                             }}
+                            onClick={onClick}
                         >
                             Apply
                         </Button>

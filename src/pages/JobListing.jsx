@@ -14,15 +14,17 @@ import {
   getJobTypes,
   getJobs,
 } from "../store/actions/job";
+import { NotificationManager } from "react-notifications";
 
 const JobListing = () => {
   const [jobType, setJobType] = useState("");
   const [jobLocation, setJobLocation] = useState("");
 
-  const { jobTypes, jobLocations, companies, jobs } = useSelector(
-    (state) => state.job
-  );
   const dispatch = useDispatch();
+
+  const { job, auth } = useSelector((state) => state)
+  const { jobTypes, jobLocations, companies, jobs } = job
+  const { isAuthenticated } = auth
 
   const jobTypeOptions = jobTypes.map((element) => ({
     value: element.id,
@@ -41,6 +43,7 @@ const JobListing = () => {
     dispatch(getJobs());
   }, [dispatch]);
 
+  // JOB search function
   const handleSearch = () => {
     let filterData = {};
 
@@ -59,6 +62,15 @@ const JobListing = () => {
 
     dispatch(getJobs(filterData));
   };
+
+  // Apply function
+  const handleApply = () => {
+    if (isAuthenticated) {
+      NotificationManager.success("Successfully Apply!");
+    } else {
+      NotificationManager.warning("Please register and login!");
+    }
+  }
 
   return (
     <Box>
@@ -136,7 +148,7 @@ const JobListing = () => {
       <Container sx={{ mt: 3 }}>
         <Grid alignItems="center" container spacing={2}>
           {jobs.map((job) => (
-            <JobCard key={job.id} job={job} />
+            <JobCard key={job.id} job={job} onClick={handleApply} />
           ))}
         </Grid>
       </Container>

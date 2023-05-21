@@ -11,6 +11,8 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        // For autoLogin to set user data from token decode
+        // use in app.js
         setCurrentUser: (state, action) => {
             state.user = action.payload
             state.isAuthenticated = !!Object.keys(action.payload).length

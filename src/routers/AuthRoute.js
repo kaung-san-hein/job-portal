@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+// to protect private page
 const AuthRoute = ({ children }) => {
     const { isAuthenticated } = useSelector((state) => state.auth)
 

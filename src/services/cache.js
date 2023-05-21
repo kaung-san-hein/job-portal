@@ -1,3 +1,5 @@
+// used two localstorage for register data like database and to save token for login
+
 const CACHE_REGISTER = "JobPortalRegister";
 const CACHE_TOKEN = "JobPortalToken";
 

@@ -5,6 +5,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CustomTextField from "./CustomTextField";
 
+// create HOC for password
 const withPasswordTextField = (Component) => {
     return (props) => {
         const [showPassword, setShowPassword] = useState(false);
@@ -27,4 +28,5 @@ const withPasswordTextField = (Component) => {
     };
 };
 
+// use HOC with CustomTexField component
 export const PasswordTextField = withPasswordTextField(CustomTextField)
