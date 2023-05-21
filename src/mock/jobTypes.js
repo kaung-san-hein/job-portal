@@ -10,5 +10,9 @@ export const jobTypes = [
     {
         id: 3,
         name: 'Part Time',
+    },
+    {
+        id: 4,
+        name: 'Intern',
     }
 ]

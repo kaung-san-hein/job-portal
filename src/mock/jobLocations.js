@@ -1,14 +1,22 @@
 export const jobLocations = [
     {
         id: 1,
-        name: 'Mandalay',
+        name: 'Washington, U.S.',
     },
     {
         id: 2,
-        name: 'Yangon',
+        name: 'California, U.S.',
     },
     {
         id: 3,
-        name: 'Nay Pyi Taw',
-    }
+        name: 'New York, U.S',
+    },
+    {
+        id: 4,
+        name: 'Arlington, Virginia, U.S.',
+    },
+    {
+        id: 5,
+        name: 'Cambridge, Massachusetts, U.S.',
+    },
 ]

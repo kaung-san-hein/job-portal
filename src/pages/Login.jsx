@@ -7,13 +7,24 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { PhoneNumberTextField } from "../components/input/withPhoneNumberTextField";
 import { PasswordTextField } from "../components/input/withPasswordTextField";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../store/actions/auth'
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
+  const { loading } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
   const handleLogin = () => {
-    console.log(phoneNumber, password);
+    const data = {
+      phoneNumber,
+      password,
+    }
+
+    dispatch(login(data))
   };
 
   return (
@@ -56,9 +67,16 @@ const Login = () => {
                   bgcolor: "var(--primary-color)",
                 }}
                 onClick={handleLogin}
+                disabled={loading}
               >
-                Login
+                {loading ? 'Loading...' : 'Login'}
               </Button>
+              <Typography align="center" mt={3}>
+                Don't have an account yet?
+                <span>
+                  <Link to="/register"> Register</Link>
+                </span>
+              </Typography>
             </Card>
           </Grid>
         </Grid>

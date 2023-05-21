@@ -8,22 +8,53 @@ import Login from "./pages/Login";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import { autoLogin } from "./store/actions/auth";
+import store from "./store";
+import { Provider } from "react-redux";
+import { getToken } from "./services/cache";
+import { setCurrentUser } from "./store/reducers/auth";
+import { NotificationContainer } from "react-notifications";
+import PrivateRoute from "./routers/PrivateRoute";
+
+const token = getToken();
+
+if (token) {
+  store.dispatch(autoLogin());
+  store.dispatch(setCurrentUser(JSON.parse(token)));
+}
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <NavigationMenu>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/jobs" element={<JobListing />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </NavigationMenu>
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <NavigationMenu>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/jobs" element={<JobListing />} />
+            <Route
+              path="/register"
+              element={
+                <PrivateRoute>
+                  <Register />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PrivateRoute>
+                  <Login />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </NavigationMenu>
+        <Footer />
+      </BrowserRouter>
+      <NotificationContainer />
+    </Provider>
   );
 };
 

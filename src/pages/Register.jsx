@@ -8,14 +8,34 @@ import Typography from "@mui/material/Typography";
 import { PhoneNumberTextField } from "../components/input/withPhoneNumberTextField";
 import { PasswordTextField } from "../components/input/withPasswordTextField";
 import CustomTextField from "../components/input/CustomTextField";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../store/actions/auth";
+import { NotificationManager } from "react-notifications";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
+
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const handleRegister = () => {
-    console.log(phoneNumber, password);
+    if (name && phoneNumber && password) {
+      const data = {
+        name,
+        phoneNumber,
+        password,
+      };
+
+      dispatch(register(data));
+      navigate('/login')
+    } else {
+      NotificationManager.warning("Please enter data!");
+    }
   };
 
   return (
@@ -63,9 +83,16 @@ const Register = () => {
                   bgcolor: "var(--primary-color)",
                 }}
                 onClick={handleRegister}
+                disabled={loading}
               >
-                Register
+                {loading ? "Loading..." : "Register"}
               </Button>
+              <Typography align="center" mt={3}>
+                Already have an account?
+                <span>
+                  <Link to="/login"> Login</Link>
+                </span>
+              </Typography>
             </Card>
           </Grid>
         </Grid>
