@@ -15,6 +15,8 @@ import { getToken } from "./services/cache";
 import { setCurrentUser } from "./store/reducers/auth";
 import { NotificationContainer } from "react-notifications";
 import PrivateRoute from "./routers/PrivateRoute";
+import NotFound from "./pages/NotFound";
+import JobDetail from "./pages/JobDetail";
 
 // get token from localstorage
 const token = getToken();
@@ -33,6 +35,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<JobListing />} />
+            <Route path="/jobs/:id" element={<JobDetail />} />
             
             {/* protected register and login route */}
             <Route
@@ -53,6 +56,9 @@ const App = () => {
             />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+
+            {/* Page Not Found */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </NavigationMenu>
         <Footer />

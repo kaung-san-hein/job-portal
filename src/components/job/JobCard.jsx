@@ -6,9 +6,13 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ job, onClick }) => {
+    const navigate = useNavigate();
+
     const {
+        id,
         title,
         company,
         location,
@@ -18,9 +22,13 @@ const JobCard = ({ job, onClick }) => {
         createdAt
     } = job;
 
+    const handleNavigate = () => {
+        navigate(`/jobs/${id}`);
+    }
+
     return (
         <Grid item xs={12} md={6}>
-            <Card>
+            <Card onClick={handleNavigate} sx={{ cursor: 'pointer' }}>
                 <CardContent>
                     <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                         {title}

@@ -54,3 +54,15 @@ export const getJobs = createAsyncThunk('job/jobs', (filterData, thunkAPI) => {
         return thunkAPI.rejectWithValue(error)
     }
 })
+
+export const getJobDetail = createAsyncThunk('job/jobDetail', (id, thunkAPI) => {
+    try {
+        const job = jobs.find((job) => job.id === Number(id));
+
+        // don't want to return undefined when id is invalid
+        return job ? job : {}
+    } catch (error) {
+        NotificationManager.error(error)
+        return thunkAPI.rejectWithValue(error)
+    }
+})

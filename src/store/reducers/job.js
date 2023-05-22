@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getCompanies, getJobLocations, getJobTypes, getJobs } from '../actions/job'
+import { getCompanies, getJobDetail, getJobLocations, getJobTypes, getJobs } from '../actions/job'
 
 const initialState = {
     loading: false,
@@ -7,6 +7,7 @@ const initialState = {
     jobLocations: [],
     companies: [],
     jobs: [],
+    jobDetail: {},
 }
 
 const jobSlice = createSlice({
@@ -60,6 +61,18 @@ const jobSlice = createSlice({
         builder.addCase(getJobs.rejected, (state) => {
             state.loading = false
             state.jobs = []
+        })
+        // getJobDetail
+        builder.addCase(getJobDetail.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(getJobDetail.fulfilled, (state, action) => {
+            state.loading = false
+            state.jobDetail = action.payload
+        })
+        builder.addCase(getJobDetail.rejected, (state) => {
+            state.loading = false
+            state.jobDetail = {}
         })
     },
 })
